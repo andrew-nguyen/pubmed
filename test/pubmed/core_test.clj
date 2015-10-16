@@ -44,16 +44,16 @@
                                    :id "999,222,1234"}}
          (#'pm/summary-url [999 222 1234]))))
 
-(deftest test-summary-titles
+(deftest test-summary-title
   (is (= [ ["Expression of microRNA-96 and its potential functions by targeting FOXO3 in non-small cell lung cancer."
             "2014 Oct 7"
             "25286764"]
            ["miR‑96 functions as a tumor suppressor gene by targeting NUAK1 in pancreatic cancer."
             "2014 Sep 19"
             "25242509"]]
-         (summary-titles {"result" {"25286764" {"title"
-                                                "Expression of microRNA-96 and its potential functions by targeting FOXO3 in non-small cell lung cancer.",
-                                                "epubdate" "2014 Oct 7"},
-                                    "25242509" {"title"
-                                                "miR‑96 functions as a tumor suppressor gene by targeting NUAK1 in pancreatic cancer.",
-                                                "epubdate" "2014 Sep 19"}}}))))
+         (summary-title-dt-id {"result" {"25286764" {"title"
+                                                     "Expression of microRNA-96 and its potential functions by targeting FOXO3 in non-small cell lung cancer.",
+                                                     "epubdate" "2014 Oct 7"},
+                                         "25242509" {"title"
+                                                     "miR‑96 functions as a tumor suppressor gene by targeting NUAK1 in pancreatic cancer.",
+                                                     "epubdate" "2014 Sep 19"}}}))))

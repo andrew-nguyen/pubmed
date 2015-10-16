@@ -32,7 +32,7 @@
   [id-search-res]
   (get-in id-search-res ["esearchresult" "idlist"]))
 
-(defn summary-titles
+(defn summary-title-dt-id
   "Return seq of [title epubdate id] from result of pubmed summary query."
   [summ-res]
   (map (fn [[id {dt "epubdate" title "title"}]] [title dt id])
