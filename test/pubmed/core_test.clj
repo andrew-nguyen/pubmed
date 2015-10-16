@@ -44,6 +44,13 @@
                                    :id "999,222,1234"}}
          (#'pm/summary-url [999 222 1234]))))
 
+(def res1 {"header" {"type" "esearch", "version" "0.3"}, "esearchresult" {"count" "111", "retmax" "20", "retstart" "0", "idlist" ["26124344" "26026077" "25883093" "25742469" "25640367" "25571912" "25474246" "25465851" "25448984" "25445205" "25337203" "25277099" "25232827" "25213696" "25195131" "25120807" "25107641" "25086636" "25051376" "25048467"], "translationset" [], "translationstack" [{"term" "\"MicroRNAs\"[nm]", "field" "nm", "count" "32487", "explode" "N"} {"term" "\"Tumor Markers, Biological\"[nm]", "field" "nm", "count" "94943", "explode" "N"} "AND" {"term" "\"Breast Neoplasms/genetics\"[MAJR]", "field" "MAJR", "count" "19959", "explode" "Y"} "AND"], "querytranslation" "\"MicroRNAs\"[nm] AND \"Tumor Markers, Biological\"[nm] AND \"Breast Neoplasms/genetics\"[MAJR]"}})
+
+(deftest test-search-res
+  (is (= 111 (search-result-count res1))
+      (= ["26124344" "26026077" "25883093" "25742469" "25640367" "25571912" "25474246" "25465851" "25448984" "25445205" "25337203" "25277099" "25232827" "25213696" "25195131" "25120807" "25107641" "25086636" "25051376" "25048467"]
+         (id-list res1))))
+
 (deftest test-summary-title
   (is (= [ ["Expression of microRNA-96 and its potential functions by targeting FOXO3 in non-small cell lung cancer."
             "2014 Oct 7"

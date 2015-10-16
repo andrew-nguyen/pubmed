@@ -28,6 +28,10 @@
   (assoc ESUMMARY :query {:db "pubmed" :retmode "json" :rettype "abstract"
                           :id (if (coll? ids) (str/join \, ids) ids)}))
 
+(defn search-result-count
+  [id-search-res]
+  (Long/parseLong (get-in id-search-res ["esearchresult" "count"])))
+
 (defn id-list
   [id-search-res]
   (get-in id-search-res ["esearchresult" "idlist"]))
