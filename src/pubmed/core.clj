@@ -43,11 +43,19 @@
        (dissoc (get summ-res "result") "uids")))
 
 (defn id-search
-  "Return pubmed id-search for term."
-  [term]
-  (json/read (io/reader (str (id-search-url term)))))
+  "Return pubmed id-search for term. Optionally sleep for millis
+  milliseconds before querying. NCBI request no more than 3
+  queries/sec."
+  ([term] (id-search 0 term))
+  ([millis term]
+   (if (pos? millis) (Thread/sleep millis))
+   (json/read (io/reader (str (id-search-url term))))))
 
 (defn summary
-  "Return pubmed summary for pubmed id(s)."
-  [ids]
-  (json/read (io/reader (str (summary-url ids)))))
+  "Return pubmed summary for pubmed id(s). Optionally sleep for millis
+  milliseconds before querying. NCBI request no more than 3
+  queries/sec."
+  ([ids] (summary 0 ids))
+  ([millis ids]
+   (if (pos? millis) (Thread/sleep millis))
+   (json/read (io/reader (str (summary-url ids))))))
