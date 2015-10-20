@@ -13,11 +13,6 @@
 (def ESEARCH  (url/url "http://eutils.ncbi.nlm.nih.gov" "entrez/eutils/esearch.fcgi"))
 (def ESUMMARY (url/url "http://eutils.ncbi.nlm.nih.gov" "entrez/eutils/esummary.fcgi"))
 
-(defn term-mirna-biomarker
-  "Construct pubmed id-search term for query of MicroRNA mirna-no as a tumor biomarker."
-  [mirna-no]
-  (format "\"MIRN%s microRNA, human\"[Supplementary Concept] AND \"Tumor Markers, Biological\"[MESH]" mirna-no))
-
 (defn- id-search-url
   [term]
   (assoc ESEARCH :query {:db "pubmed" :retmode "json"
