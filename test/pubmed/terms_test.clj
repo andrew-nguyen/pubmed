@@ -15,3 +15,9 @@
                              :query {:db "pubmed", :retmode "json",
                                      :term "\"MIRN96 microRNA, human\"[Supplementary Concept] AND \"Tumor Markers, Biological\"[MESH]"}}
            (#'pm/id-search-url x)))))
+
+(deftest term-mir
+  (is (= "105" (mir-num "105-1")))
+  (is (= "33" (mir-num "33b")))
+  (is (= "\"MIRN999 microRNA, human\"[Supplementary Concept] OR mir-999[Title] OR microrna-999[Title] OR mir999[Title] "
+         (term-mir-name 999))))

@@ -30,10 +30,8 @@
   "\"Tumor Markers, Biological\"[MESH] OR (biomarker[Title/Abstract] AND cancer[Title/Abstract])")
 
 (defn term-mir-name
-  [mir]
-  (format "\"MIRN%s microRNA, human\"[Supplementary Concept] OR "
-          "mir-%s[Title] OR microrna-%s[Title] OR mir%s[Title] "
-          mir mir mir mir))
+  [mir-no]
+  (format "\"MIRN%s microRNA, human\"[Supplementary Concept] OR mir-%s[Title] OR microrna-%s[Title] OR mir%s[Title] " mir-no mir-no mir-no mir-no))
 
 (defn term-mir-biomarker-mesh-abstract
   [mir-no]
