@@ -20,7 +20,7 @@
 (defn term-mirna-biomarker-mesh
   "Construct pubmed id-search term for query of MicroRNA mirna-no as a tumor biomarker."
   [mir-no]
-  (format "\"MIRN%s microRNA, human\"[Supplementary Concept] AND \"Tumor Markers, Biological\"[MESH]" mir-no))
+  (format "\"MIRN%s microRNA, human\"[nm] AND \"Tumor Markers, Biological\"[MESH]" mir-no))
 
 (defn term-mir-biomarker-abstract
   [mir-no]
@@ -31,7 +31,9 @@
 
 (defn term-mir-name
   [mir-no]
-  (format "\"MIRN%s microRNA, human\"[Supplementary Concept] OR mir-%s[Title] OR microrna-%s[Title] OR mir%s[Title]" mir-no mir-no mir-no mir-no))
+  ;; mostly mesh has names without dash: "MIRN21 microRNA, human"[nm]
+  ;; but also some with dash, eg "MIRN-569 microRNA, human"[nm]
+  (format "\"MIRN%s microRNA, human\"[nm] OR \"MIRN-%s microRNA, human\"[nm] OR hsa-mir-%s[Title] OR mir-%s[Title] OR microrna-%s[Title] OR mir%s[Title]" mir-no mir-no mir-no mir-no mir-no mir-no))
 
 (defn term-mir-biomarker-mesh-abstract
   [mir-no]

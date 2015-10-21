@@ -13,13 +13,13 @@
                              :path "/entrez/eutils/esearch.fcgi",
                              :anchor nil,
                              :query {:db "pubmed", :retmode "json",
-                                     :term "\"MIRN96 microRNA, human\"[Supplementary Concept] AND \"Tumor Markers, Biological\"[MESH]"}}
+                                     :term "\"MIRN96 microRNA, human\"[nm] AND \"Tumor Markers, Biological\"[MESH]"}}
            (#'pm/id-search-url x)))))
 
 (deftest term-mir
   (is (= "105" (mir-num "105-1")))
   (is (= "33" (mir-num "33b")))
-  (is (= "\"MIRN999 microRNA, human\"[Supplementary Concept] OR mir-999[Title] OR microrna-999[Title] OR mir999[Title]"
+  (is (= "\"MIRN999 microRNA, human\"[nm] OR \"MIRN-999 microRNA, human\"[nm] OR hsa-mir-999[Title] OR mir-999[Title] OR microrna-999[Title] OR mir999[Title]"
          (term-mir-name 999)))
-  (is (= "(\"MIRN999-111 microRNA, human\"[Supplementary Concept] OR mir-999-111[Title] OR microrna-999-111[Title] OR mir999-111[Title] OR \"MIRN999 microRNA, human\"[Supplementary Concept] OR mir-999[Title] OR microrna-999[Title] OR mir999[Title]) AND (\"Tumor Markers, Biological\"[MESH] OR (biomarker[Title/Abstract] AND cancer[Title/Abstract]))"
+  (is (= "(\"MIRN999-111 microRNA, human\"[nm] OR \"MIRN-999-111 microRNA, human\"[nm] OR hsa-mir-999-111[Title] OR mir-999-111[Title] OR microrna-999-111[Title] OR mir999-111[Title] OR \"MIRN999 microRNA, human\"[nm] OR \"MIRN-999 microRNA, human\"[nm] OR hsa-mir-999[Title] OR mir-999[Title] OR microrna-999[Title] OR mir999[Title]) AND (\"Tumor Markers, Biological\"[MESH] OR (biomarker[Title/Abstract] AND cancer[Title/Abstract]))"
          (term-mir-biomarker-mesh-abstract "999-111"))))
