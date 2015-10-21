@@ -18,25 +18,25 @@
   (re-find #"^\d+" mir))
 
 (defn term-mirna-biomarker-mesh
-  "Construct pubmed id-search term for query of MicroRNA mirna-no as a tumor biomarker."
+  "Construct pubmed id-search MESH term for query of MicroRNA mirna-no as a tumor biomarker or anti-cancer agent."
   [mir-no]
-  (format "\"MIRN%s microRNA, human\"[nm] AND \"Tumor Markers, Biological\"[MESH]" mir-no))
+  (format "(\"MIRN%s microRNA, human\"[nm] OR \"MIRN-%s microRNA, human\"[nm]) AND (\"Tumor Markers, Biological\"[nm] OR \"Antineoplastic Agents\"[nm])" mir-no mir-no))
 
-(defn term-mir-biomarker-abstract
+(defn term-mirna-biomarker-abstract
   [mir-no]
   (format "(mir-%s[Title] OR microrna-%s[Title] OR mir%s[Title]) AND biomarker[Title/Abstract] AND cancer[Title/Abstract]" mir-no mir-no mir-no))
 
 (def term-cancer-biomarker
-  "\"Tumor Markers, Biological\"[MESH] OR (biomarker[Title/Abstract] AND cancer[Title/Abstract])")
+  "\"Tumor Markers, Biological\"[nm] OR \"Antineoplastic Agents\"[nm] OR ((biomarker[Title/Abstract] OR therapeutic[Title/Abstract]) AND cancer[Title/Abstract])")
 
-(defn term-mir-name
+(defn term-mirna-name
   [mir-no]
   ;; mostly mesh has names without dash: "MIRN21 microRNA, human"[nm]
   ;; but also some with dash, eg "MIRN-569 microRNA, human"[nm]
   (format "\"MIRN%s microRNA, human\"[nm] OR \"MIRN-%s microRNA, human\"[nm] OR hsa-mir-%s[Title] OR mir-%s[Title] OR microrna-%s[Title] OR mir%s[Title]" mir-no mir-no mir-no mir-no mir-no mir-no))
 
-(defn term-mir-biomarker-mesh-abstract
+(defn term-mirna-biomarker-mesh-or-abstract
   [mir-no]
-  (str "(" (term-mir-name mir-no)
-       (if-not (= mir-no (mir-num mir-no)) (str " OR " (term-mir-name (mir-num mir-no))))
+  (str "(" (term-mirna-name mir-no)
+       (if-not (= mir-no (mir-num mir-no)) (str " OR " (term-mirna-name (mir-num mir-no))))
        ") AND (" term-cancer-biomarker ")"))

@@ -8,7 +8,8 @@
              [xml :as xml]]
             [clojure.java.io :as io]
             [clojure.data [json :as json]]
-            [cemerick.url :as url]))
+            [cemerick.url :as url]
+            [pubmed.terms :as term]))
 
 (def ESEARCH  (url/url "http://eutils.ncbi.nlm.nih.gov" "entrez/eutils/esearch.fcgi"))
 (def ESUMMARY (url/url "http://eutils.ncbi.nlm.nih.gov" "entrez/eutils/esummary.fcgi"))
