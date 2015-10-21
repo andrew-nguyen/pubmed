@@ -31,10 +31,10 @@
 
 (defn term-mir-name
   [mir-no]
-  (format "\"MIRN%s microRNA, human\"[Supplementary Concept] OR mir-%s[Title] OR microrna-%s[Title] OR mir%s[Title] " mir-no mir-no mir-no mir-no))
+  (format "\"MIRN%s microRNA, human\"[Supplementary Concept] OR mir-%s[Title] OR microrna-%s[Title] OR mir%s[Title]" mir-no mir-no mir-no mir-no))
 
 (defn term-mir-biomarker-mesh-abstract
   [mir-no]
-  (str "( " (term-mir-name mir-no)
+  (str "(" (term-mir-name mir-no)
        (if-not (= mir-no (mir-num mir-no)) (str " OR " (term-mir-name (mir-num mir-no))))
-       " ) AND (" term-cancer-biomarker ")"))
+       ") AND (" term-cancer-biomarker ")"))
